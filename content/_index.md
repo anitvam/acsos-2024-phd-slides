@@ -1,15 +1,14 @@
 +++
-title = "On the external concurrency of current BDI frameworks for MAS"
+title = "Supporting Autonomic Computing via BDI Tooling"
 outputs = ["Reveal"]
 +++
 
-# On the external concurrency 
-# of current BDI frameworks for MAS
+# Supporting Autonomic Computing 
+# via BDI Tooling
 
 <br>
 
-Martina Baiardi, Samuele Burattini, Giovanni Ciatto <br />
-Danilo Pianini, **Alessandro Ricci**, and Andrea Omicini
+Martina Baiardi
 
 <small>Department of Computer Science and Engineering (DISI)<br>
 Alma Mater Studiorum — Università di Bologna <br>
@@ -17,347 +16,281 @@ Via dell’Università 50, 47522 Cesena (FC), Italy </small>
 
 ---
 
-<!-- ## BDI Agents
+## Context
+#### Autonomic Computing
 
-Architettura BDI -> mettiamo il puntino su qual è l'architettura di riferimento
+<br/>
 
-Noi, a partire da questo, abbiamo fatto un nostro formalismo per descrivere la concorrenza, -->
+{{% multicol %}}{{% col %}}
 
-# Context
-## BDI Agents Programming
+<img src="images/autonomic-diagram.svg" width="100%" />
 
+<div class="mx-5 text-center">
 
-{{% multicol %}}
-{{% col %}}
-
-<div class="text-center">
-
-- most famous semantics: __AgentSpeak(L)__
-
-- most famous architecture (see picture)
-
-- several implementations 
-  - focus on: Astra, GOAL, Jadex, JaKtA, <br />Jason, PHIDIAS, SPADE-BDI
+## *<i class="fa-solid fa-arrow-up"></i> MAPE-K* 
+Reference <u>model</u> for *Autonomic* and *self-\** systems design. 
 
 </div>
 
-{{% /col %}}
-{{% col %}}
+{{% /col %}}{{% col  %}}
 
-<div class="text-center">
+<div class="mx-5 text-center">
 
-<img src="images/architecture.png"  width="80%"/>
+{{% fragment %}}
 
-</div>
+<img src="images/bdi-diagram.svg" width="100%" />
 
-{{% /col %}}
-{{% /multicol %}}
+## *<i class="fa-solid fa-arrow-up"></i> BDI* 
+Reference <u>framework</u> (*AgentSpeak(L)*) for *Multi-Agent Systems*. 
 
----
-
-## Motivation
-
-> Insight: _the same architecture may be implemented in so many ways_
-> <br> (e.g., w.r.t. __concurrency__)
-- semantics _unaffected_
-- impact on practical properties such as __efficiency__ & __reproducibility__
-
-### Goals
-
-1. Devise concurrency patterns from the state-of-the-practice
-2. Classify BDI technologies accordingly
-
----
-
-<!-- ## Computational Autonomy
-<br>
-
-- **Computational autonomy** is a pre-requisite for **autonomy** in software agents
-- Agent's control-flow &rarr; mainstream programming languages concurrency abstractions <br> (e.g., thread, process, ...)  -->
-
-## Background
-
-- Agents lifecycle, in general, is a control-loop
-  + __sense__, _then_ __deliberate__, _then_ __act__, repeat
-
-- BDI agents are more _complex_
-  * e.g. sense implies collecting percepts, revising beliefs, etc.
-  * e.g. deliberate implies selecting plans, updating intentions, etc.
-
-![](./bdi.svg)
-
----
-
-## Which concurrency?
-
-We distinguish between **internal** and **external** concurrency
-
-<!-- {{% multicol %}}
-{{% col %}} 
-
-<div class="text-center">
-
-### Internal Concurrency
-
-\begin{aligned}
-Agent ::== Perceive \parallel Deliberate \parallel Act
-\end{aligned}
-
-\begin{aligned}
-Perceive ::== (\verb|perceive|_1 \parallel \ldots \parallel \verb|perceive|_M) \cdot Sense
-\end{aligned}
-
-\begin{aligned}
-Deliberate ::== (Deliberate_1 \parallel \ldots \parallel Deliberate_L) \cdot Deliberate
-\end{aligned}
-
-\begin{aligned}
-Act ::== (Act_1 \parallel \ldots \parallel Act_K) \cdot Act
-\end{aligned}
+{{% /fragment %}}
 
 </div>
 
-{{% /col %}}
-{{% col %}} 
+{{% /col %}}{{% /multicol %}}
 
-<div class="text-center">
+{{% fragment %}}
+<div class="position-absolute">
+<iframe src="https://giphy.com/embed/g01ZnwAUvutuK8GIQn" width="100%" height="100%" frameBorder="0" class="fixed-top" allowFullScreen></iframe>
 
-### External Concurrency
+<div class="fixed-top " style="color:white">
 
-\begin{aligned}
-Mas ::== Agent_1 \parallel \ldots \parallel Agent_N 
-\end{aligned}
-
-\begin{aligned}
-Agent ::== \verb|sense| \cdot \verb|deliberate| \cdot \verb|act| \cdot Agent \\
-\end{aligned}
+<h2 style="color:white"> Why isn't BDI common in autonomic loops? </h2>
 
 </div>
 
-{{% /col %}}
-{{% /multicol %}} -->
-
-> __Internal__ concurrency $\approx$ how agents schedule intentions internally
-
-> __External__ concurrency  $\approx$ how agents' control-loops are scheduled by the underlying platform
+</div>
+{{% /fragment %}}
 
 ---
 
-## Which concurrency abstractions?
-#### In practice, technological platforms support:
+# BDI?
 
-{{% multicol %}}
-{{% col %}}
+## Beliefs, Desires, Intentions
 
-<div class="text-center">
+<br />
 
-- **Processes**
-- **Threads**
-- **Event Loops**
-- **Executors**
+- It's a framework to model Multi-Agent Systems through *Goals*
+- Reduces the *abstraction gap* between *cognitive abstractions* and the abstractions of common paradigms
+  - Mimicking human-level notions such as *beliefs*, *desires* and *intentions*
 
+### three main abstractions:
+
+- *Beliefs*: mental state of the agent, that changes over time.
+- *Desires*: motivational state of the system.
+- *Intentions*: deliberative state of the agent.
+
+<div>
+<br />
+
+<small style="text-align: left"> 
+--- <br/>
+[1] Bratman, Michael. "Intention, plans, and practical reason." (1987) <br />
+[2] Anand S. Rao and Michael P. Georgeff. "BDI agents: From theory to practice." (1995) <br />
+[3] Anand S. Rao. "Agentspeak(l): BDI agents speak out in a logical computable language." (1996) 
+</small>
 </div>
 
-{{% /col %}}
-{{% col %}}
-
-![](./concurrency-abstractions.svg)
-
-{{% /col %}}
-{{% /multicol %}}
-
 
 ---
 
-## Common concurrency patterns for MAS
+# MAPE-K vs. BDI: Key differences
 
+### Conceptual vs. practical
 
-- **One-Agent-One-Thread** ( **1A1T** )
-- **All-Agents-One-Thread** ( **AA1T** )
-- **All-Agents-One-Event-Loop** ( **AA1EL** )
-- **All-Agents-One-Executor** ( **AA1E** )
-  - With a **fixed**-size thread pool
-  - With a **variable**-size thread pool 
+* **MAPE-K** defines a conceptual model, needs application-specific implementations
+    * favors ad-hoc implementations
+* **BDI** is typically reified into a practical tool (a language or library)
+    * enforces commitment to a technology
 
----
+### Architectural vs. formal
 
-## One-Agent-One-Thread ( **1A1T** )
+* **MAPE-K** defines a reasoning architecture and a loop scheme
+* **BDI** has been formalised into AgentSpeak(L)
+    * Typical implementations adhere to the formal specification
 
-![](./1a1t.svg)
+### Simple vs. complex
 
----
-
-## All-Agents-One-Thread ( **AA1T** )
-
-![](./aa1t.svg)
-
----
-
-## All-Agents-One-Executor ( **AA1E** )
-
-Allows for various level of __granularity__:
-
-{{% multicol %}}
-{{% col %}}
-
-![](./aa1e.svg)
-
-{{% /col %}}
-{{% col %}}
-
-![](./aa1e-bis.svg)
-
-{{% /col %}}
-{{% /multicol %}}
-
-> Different properties w.r.t. **fixed** or **variable** amount of worker threads ($N$)
-
-> All-Agents-One-Event-Loop (**AA1EL**) $\equiv$ AA1E with _just one thread_
+* **MAPE-K** is simpler
+    * can be implemented on a per-application basis
+* **BDI** requires complex matching ad plan-selection algorithms
+    * hard to build from scratch in a custom fashion
 
 ---
 
-## One-Agent-One-Process( **1A1P** )
+# BDI Agent Programming Languages
+{{% fragment %}}
 
-![](./1a1p.svg)
+### ... some of them
 
----
+{{% /fragment %}}
 
-## Which concurrency abstraction is the most appropriate?
+<br />
 
-- The selection of an appropriate concurrency model deeply impacts several aspects of the agent programming framework 
-  - The **efficiency** of the MAS may improve, but
-  <!-- TODO add example -->
-  - **predictability** and **reproducibility** may be affected.
-    <!-- TODO add example -->
-- **Capturing and controlling concurrency is crucial, <br />and they often are hidden under the framework abstractions** 
+{{< figure src="images/AOPlang.svg" width="50%" >}}
 
+<br />
 
----
-
-## Analysis on BDI frameworks:
-
-
-{{% multicol %}}
-{{% col %}} 
-
-<div class="text-center">
-
-### Methodology
-
-We inspected external concurrency in three steps:
-
-1. **Empirical Evaluation** through a synthetic benchmark
-2. **Documentation** and **source code inspection** of the selected BDI frameworks
-3. **Direct contact** with maintainers
-
+<div>
+<small style="text-align: left"> 
+[1] Collier, R.W., Russell, S.E., Lillis, D.. "Reflecting on agent programming with AgentSpeak(L). I" (2015) <br />
+[2] Hindriks, K.V.. "Programming rational agents in GOAL." (2009) <br />
+[3] Pokahr, A., Braubach, L., Lamersdorf, W.. "Jadex: A BDI reasoning engine." (2005) <br />
+[4] Bordini, R.H., Hübner, J.F., Wooldridge, M.J.. "Programming Multi-Agent Systems in AgentSpeak using Jason." (2007) <br />
+[5] D’Urso, F., Longo, C.F., Santoro, C.. "Programming intelligent iot systems with a python-based declarative tool." (2019) <br />
+[6] Palanca, J., Rincon, J.A., Carrascosa, C., Julián, V., Terrasa, A.. "A flexible agent architecture in SPADE." (2022)
+</small>
 </div>
 
-{{% /col %}}
-{{% col %}} 
-
-<div class="text-center">
-
-### Framework selection
-
-We selected actively-maintained and open source BDI programming frameworks:
-- **Astra**
-- **GOAL**
-- **Jadex**
-- **JaKtA**
-- **Jason**
-- **PHIDIAS**
-- **SPADE-BDI**
-
-</div>
-
-{{% /col %}}
-{{% /multicol %}}
-
 ---
 
-## Benchmark
-
-{{% multicol %}}
-{{% col %}} 
-
-<div class="text-center">
-
-### Agent: PINGER
-
-```prolog
-!ping.
-+!ping <- 
-    .revealCurrentThread("intention 1");
-    .send(pong, tell, ball);
-    !!showThread(2); /* Generates intention 2 */
-    .revealCurrentThread("intention 1").
-+ball <-
-    !!showThread(4); /* Generates intention 4 */
-    .revealCurrentThread("intention 3").
-+!showThread(X) <- .revealCurrentThread("intention " + X).
-```
-
-</div>
-
-{{% /col %}}
-{{% col %}} 
-
-<div class="text-center">
-
-### Agent: PONGER
-
-```prolog
-+ball[source(X)] <-
-    .revealCurrentThread("intention 5");
-    .send(X, tell, ball);
-    !!showThread(6); /* Generates intention 6 */
-    .revealCurrentThread("intention 5").
-+!showThread(X) <- .revealCurrentThread("intention " + X).
-```
-
-</div>
-
-{{% /col %}}
-{{% /multicol %}}
-
----
-
-## Results
-
-
-| Model &rArr; <br /> Tech. &dArr; | **1A1T** | **AA1T** | **AA1EL** |  **AA1E** <br /> **fixed** | **AA1E** <br /> **variable** | **1A1P** |
-| --- | --- | --- | --- | --- | --- | --- |
-| **Astra** | {{< maybe >}} {{< /maybe >}} |  {{< maybe >}} {{< /maybe >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< maybe >}} {{< /maybe >}} |  
-| **Goal** | {{< tick >}} {{< /tick >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} |  
-| **Jadex** | {{< maybe >}} {{< /maybe >}} | {{< tick >}} {{< /tick >}} | {{< maybe >}} {{< /maybe >}} | {{< maybe >}} {{< /maybe >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} |  
-| **JaKtA** | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< maybe >}} {{< /maybe >}} |  
-| **Jason** | {{< tick >}} {{< /tick >}} | {{< maybe >}} {{< /maybe >}} | {{< tick >}} {{< /tick >}} | {{< tick >}} {{< /tick >}} | {{< maybe >}} {{< /maybe >}} | {{< tick >}} {{< /tick >}} |  
-| **Phidias** | {{< tick >}} {{< /tick >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< tick >}} {{< /tick >}} |  
-| **Spade-BDI** | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< tick >}} {{< /tick >}} | {{< cross >}} {{< /cross >}} | {{< cross >}} {{< /cross >}} | {{< tick >}} {{< /tick >}} |  
+# Majority of BDI tools: Libraries
 
 <br>
+<br>
 
-#### Legend
-- {{< tick >}} {{< /tick >}} $\equiv$ supported
-- {{< cross >}} {{< /cross >}} $\equiv$ __not__ supported
-- {{< maybe >}} {{< /maybe >}} $\equiv$ supported in principle, <br />but requires the user to implement it
+{{% multicol class="text-center" %}} {{< col class="col-75">}}
+
+* Built for mainstream languages
+* Subject to the *syntactic restrictions* of their host language
+  * "True" AOP/BDI feeling hardly achieved
+
+{{< /col >}}
+
+{{< col class="col-25">}}
+
+{{< fragment >}}
+## <i class="fa-solid fa-arrow-right"></i> *custom language*
+{{< /fragment >}}
+
+{{< /col >}} {{% /multicol %}}
 
 ---
 
-## Discussion
+# AOP Custom Languages
 
-> __Takeaway 1__: better for a BDI framework to support _multiple_ concurrency patterns
+<div>
 
-> __Takeaway 2__: even better for a BDI framework to support concurrency patterns _customisability_ on the __user-side__ 
-+ supporting e.g. __comparing__ perfomance among different concurrency patterns, for the same MAS
-+ supporting e.g. _prioritising_ __determinism__ over __efficiency__ (AA1T) for __testing__ 
-+ supporting e.g. _prioritising_ __indipendence__ of control flows (1A1T) for __I/O-bound__ tasks 
- 
+<div class=" w-50 m-auto text-right" style="text-align: left">
+
+<i class="fa-solid fa-check" style="color: green; margin-right: 10px"></i>
+Great ergonomy for BDI AOP (made by purpose)
+
+<i class="fa-solid fa-xmark" style="color: red; margin-right: 10px"></i>
+BDI-specific, not multi-paradigm 
+
+<i class="fa-solid fa-xmark" style="color: red; margin-right: 10px"></i>
+Steep learning curve
+
+<i class="fa-solid fa-xmark" style="color: red; margin-right: 10px"></i>
+Require custom tooling - IDEs, code suggestions, syntax highlighters, linters...
+
+<i class="fa-solid fa-xmark" style="color: red; margin-right: 10px"></i>
+Small community
+
+<i class="fa-solid fa-xmark" style="color: red; margin-right: 10px"></i>
+High maintenance cost!
+
+</div>
+
 ---
 
-## Conclusions
+# A hybrid approach
 
-It is necessary to separate BDI architecture from its actual execution
- * **without impacting the architecture definition**
- * **without necessarily knowing how to program concurrency abstractions**
- * **choosing dynamically which concurrent execution suits the scenario**
+{{< figure src="ergonomy.png" width="60%" >}} 
+
+---
+
+# JaKtA: <br> <u>Ja</u>son-like <u>K</u>o<u>t</u>lin <u>A</u>gents [1]
+
+Internal Domain-Specific Language (DSL) implemented in Kotlin
+
+* Multi-paradigm support: OOP + FP + BDI AOP
+* Hosted on a mainstream language: gentle learning curve
+  * Great learning resources for Kotlin
+  * Significantly large community for help
+* Reuses the entire existing Kotlin toolchain
+  * Developed and *maintained* by the language maintainers and the community
+  * Maintenance is greatly reduced
+* Good ergonomy
+
+<br />
+<br />
+
+<div>
+<small style="text-align: left"> 
+---<br/>
+[1] Baiardi, M., Burattini, S., Ciatto, G., & Pianini, D. (2023, September). JaKtA: BDI Agent-Oriented Programming in Pure Kotlin. 
+</small>
+</div>
+
+---
+
+# Why kotlin?
+<br>
+
+{{% multicol %}}{{% col %}}
+* Natively multi-paradigm (OOP + FP)
+* Statically typed
+  * With a good IDE, helps understanding what can be written where
+* Direct support to internal DSLs
+  * a.k.a "Type-safe builders" in the Kotlin documentation
+* Support for multiplatform development
+{{% /col %}}
+
+{{< col class="text-center">}}
+
+* Growing community
+  * Strongly pushed by Google for Android
+{{< figure src="android-kotlin.png" width="70%" >}}
+
+{{% /col %}}{{% /multicol %}}
+
+
+---
+
+## Jakta: multi-paradigm AOP/BDI+OOP+FP
+
+
+```kotlin
+mas {                                                   // BDI specification
+  fun allPlayers(team: String) =
+    Regex("""<a\s(\X*?)\sdata-cy="player">(.*)<\/a>""") // Object-oriented regex library
+        .findAll(URL("https://www.besoccer.com/team/squad/$team").readText())
+        .map { team to it.groupValues[2] }              // Lambda expression (Functional style)
+
+  listOf("napoli", "milan", "internazionale")           // Kotlin standard library
+      .flatMap(::allPlayers)                            // Higher-order function (Functional style)
+      .forEach { (team, player) ->                      // Destructuring declaration
+          agent(player) {
+              beliefs { fact { squad(team) } }
+              goals { achieve(start) }
+              plans {
+                  +achieve(start) onlyIf { squad(S).fromSelf } then {
+                      execute(print("Hello! I play for", S))
+                  }
+              }
+          }
+      }
+}.start()
+```
+
+---
+
+## Future work
+JaKtA is still in its early stages, in the future we plan to: 
+* Provide stable tools to emulate dynamic environments (**Simulation**)
+    * Validate the integration with an application, e.g.: drone swarm coordination (**Use case**) 
+* Expose BDI abstractions within the debugger for helping bug inspection (**Debug**)
+* Use BDI abstractions in small fragments of non-BDI programs (**Bidirectional paradigm blending**)
+    * (we can already use fragments of functional and OOP inside a BDI program)
+
+---
+
+# try jakta
+<br>
+
+[github.com/jakta-bdi/jakta-examples](https://github.com/jakta-bdi/jakta-examples)
+
+<img src="images/qr-code.svg" width="20%" />
+
