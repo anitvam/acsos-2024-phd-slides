@@ -94,6 +94,12 @@ Reference <u>framework</u> (*AgentSpeak(L)*) for *Multi-Agent Systems*.
 
 ---
 
+## AgentSpeak(L) under the hood...
+
+<img src="images/architecture.png" width=50% />
+
+---
+
 # MAPE-K vs. BDI: Key differences
 
 ### Conceptual vs. practical
